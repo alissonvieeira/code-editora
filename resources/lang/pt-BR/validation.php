@@ -138,14 +138,17 @@ return [
         'password_confirmation' => 'confirmação da senha',
         'password'              => 'senha',
         'phone'                 => 'telefone',
+        'price'                 => 'preço',
         'second'                => 'segundo',
         'sex'                   => 'sexo',
         'state'                 => 'estado',
         'subject'               => 'assunto',
+        'subtitle'              => 'subtítulo',
         'time'                  => 'hora',
         'title'                 => 'título',
         'username'              => 'usuário',
         'year'                  => 'ano',
+
     ],
 
 ];

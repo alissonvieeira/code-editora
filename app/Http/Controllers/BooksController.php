@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Http\Requests\BooksRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
@@ -34,9 +36,12 @@ class BooksController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BooksRequest $request)
     {
-        Book::create($request->all());
+        $book = $request->all();
+        $book['author_id'] = Auth::getUser()->id;
+
+        Book::create($book);
         return redirect()->route('books.index');
     }
 
@@ -58,9 +63,12 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(BooksRequest $request, Book $book)
     {
-        $book->fill($request->all());
+        $data = $request->all();
+        $data['author_id'] = Auth::getUser()->id;
+
+        $book->fill($data);
         $book->save();
 
         return redirect()->route('books.index');
