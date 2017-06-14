@@ -19,6 +19,15 @@ class AppServiceProvider extends ServiceProvider
             }
             return null;
         });
+
+        \Html::macro('openFormGroup', function($field = null, $errors = null){
+            $hasError = ($field != null and $errors != null and $errors->has($field)) ? ' has-error' : '';
+            return "<div class='form-group$hasError'>";
+        });
+
+        \Html::macro('closeFormGroup', function(){
+            return "</div>";
+        });
     }
 
     /**

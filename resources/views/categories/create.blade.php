@@ -6,15 +6,15 @@
             <h3>Nova categoria</h3>
             {!! Form::open(['route' => 'categories.store', 'class' => 'form']) !!}
 
-            <div class="form-group {{ $errors->first('name') ? 'has-error' : ''}}">
+            {!! Html::openFormGroup('name', $errors) !!}
                 {!! Form::label('name', 'Nome', ['class' => 'control-label']) !!}
                 {!! Form::text('name', null, ['class' => 'form-control']) !!}
                 {!! Form::error('name', $errors) !!}
-            </div>
+            {!! Html::closeFormGroup() !!}
 
-            <div class="form-group">
+            {!! Html::openFormGroup() !!}
                 {!! Form::submit('Criar categoria', ['class' => 'btn btn-primary']) !!}
-            </div>
+            {!! Html::closeFormGroup() !!}
 
             {!! Form::close() !!}
         </div>
