@@ -7,14 +7,10 @@
 
             {!! Form::open(['route'=> ['categories.update', $category->id], 'method' => 'PUT', 'class' => 'form']) !!}
 
-                {!! Html::openFormGroup('name', $errors) !!}
-                    {!! Form::label('name', 'Nome', ['class' => 'control-label']) !!}
-                    {!! Form::text('name', $category->name, ['class' => 'form-control']) !!}
-                    {!! Form::error('name', $errors) !!}
-                {!! Html::closeFormGroup() !!}
+                @include('categories._form')
 
                 {!! Html::openFormGroup() !!}
-                    {!! Form::submit('Salvar categoria', ['class' => 'btn btn-primary']) !!}
+                    {!! Button::primary('Salvar Categoria')->submit() !!}
                 {!! Html::closeFormGroup() !!}
 
             {!! Form::close() !!}
