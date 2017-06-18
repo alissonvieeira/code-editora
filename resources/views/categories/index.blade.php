@@ -17,12 +17,12 @@
                                 ['categories.destroy', 'category' => $category->id],
                                 'method' => 'DELETE', 'id' => $deleteForm,'style' => 'display:none;']).
                                 Form::close();
-                    $anchorDestroy = Button::link('Delete')
+                    $anchorDestroy = Button::link('Excluir')
                                             ->asLinkTo($linkDestroy)->addAttributes([
                                                 'onclick' => "event.preventDefault();document.getElementById(\"{$deleteForm}\").submit();"
                                             ]);
                     return "<ul class=\"list-inline\">".
-                                "<li>".Button::link('Edit')->asLinkTo($linkEdit)."</li>".
+                                "<li>".Button::link('Editar')->asLinkTo($linkEdit)."</li>".
                                 "<li>|</li>".
                                 "<li>".$anchorDestroy."</li>".
                            "</ul>".
