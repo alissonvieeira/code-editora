@@ -38,11 +38,14 @@ class BooksController extends Controller
      */
     public function store(BooksRequest $request)
     {
-        $book = $request->all();
-        $book['author_id'] = Auth::getUser()->id;
+        $data = $request->all();
+        $data['author_id'] = Auth::getUser()->id;
 
-        Book::create($book);
-        return redirect()->route('books.index');
+        Book::create($data);
+        $url = $request->get('redirect_to', route('books.index'));
+        $request->session()->flash('message', 'Livro cadastrado com sucesso.');
+
+        return redirect()->to($url);
     }
 
     /**
@@ -70,8 +73,10 @@ class BooksController extends Controller
 
         $book->fill($data);
         $book->save();
+        $url = $request->get('redirect_to', route('books.index'));
+        $request->session()->flash('message', 'Livro alterado com sucesso.');
 
-        return redirect()->route('books.index');
+        return redirect()->to($url);
     }
 
     /**
@@ -83,6 +88,7 @@ class BooksController extends Controller
     public function destroy(Book $book)
     {
         $book->delete();
-        return redirect()->route('books.index');
+        \Session::flash('message', 'Livro excluído com sucesso.');
+        return redirect()->to(\URL::previous());
     }
 }

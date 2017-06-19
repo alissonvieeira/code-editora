@@ -2,9 +2,10 @@
 
 namespace App;
 
+use Bootstrapper\Interfaces\TableInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Book extends Model implements TableInterface
 {
     protected $fillable = [
         'author_id', 'title', 'subtitle', 'price'
@@ -13,5 +14,26 @@ class Book extends Model
     public function author()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function getTableHeaders()
+    {
+        return ['#', 'Título', 'Subtítulo', 'Preço'];
+    }
+
+    public function getValueForHeader($header)
+    {
+        switch ($header){
+            case '#':
+                return $this->id;
+            case 'Título':
+                return $this->title;
+            case 'Subtítulo':
+                return $this->subtitle;
+            case 'Preço':
+                return $this->price;
+        }
+
+        return $this->$header;
     }
 }

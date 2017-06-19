@@ -29,6 +29,10 @@
                    [
                        'link' => route('categories.index'),
                        'title' => 'Categoria'
+                   ],
+                   [
+                       'link' => route('books.index'),
+                       'title' => 'Livros'
                    ]
                 ]);
                 $logout = Navigation::links([

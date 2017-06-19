@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Book;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,9 +37,10 @@ class BooksRequest extends FormRequest
     public function rules()
     {
         $book = $this->route('book');
+        $id = $book ? $book->id : NULL;
 
         return [
-            'title' => "required|max:255|unique:books,title,$book->id",
+            'title' => "required|max:255|unique:books,title,$id",
             'subtitle' => "required|max:255",
             'price' => "required|numeric"
         ];

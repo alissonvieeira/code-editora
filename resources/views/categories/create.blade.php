@@ -7,11 +7,11 @@
 
             {!! Form::open(['route' => 'categories.store', 'class' => 'form']) !!}
 
-            @include('categories._form')
+                @include('categories._form')
 
-            {!! Html::openFormGroup() !!}
-                {!! Button::primary('Criar Categoria')->submit() !!}
-            {!! Html::closeFormGroup() !!}
+                {!! Html::openFormGroup() !!}
+                    {!! Button::primary('Criar Categoria')->submit() !!}
+                {!! Html::closeFormGroup() !!}
 
             {!! Form::close() !!}
         </div>
