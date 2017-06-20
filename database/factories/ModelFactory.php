@@ -30,7 +30,7 @@ $factory->define(\CodePub\Models\Category::class, function (Faker\Generator $fak
     ];
 });
 
-$factory->define(CodePub\Book::class, function (Faker\Generator $faker) {
+$factory->define(\CodePub\Models\Book::class, function (Faker\Generator $faker) {
     return [
         'author_id' => '1',
         'title' => ucfirst($faker->word),
