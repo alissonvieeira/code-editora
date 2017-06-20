@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace CodePub\Http\Controllers;
 
-use App\Book;
-use App\Http\Requests\BooksRequest;
+use CodePub\Book;
+use CodePub\Http\Requests\BooksRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
