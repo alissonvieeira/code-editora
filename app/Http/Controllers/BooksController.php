@@ -4,11 +4,22 @@ namespace CodePub\Http\Controllers;
 
 use CodePub\Models\Book;
 use CodePub\Http\Requests\BooksRequest;
+use CodePub\Repositories\BookRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BooksController extends Controller
 {
+    /**
+     * @var BookRepository
+     */
+    private $repository;
+
+    public function __construct(BookRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +27,7 @@ class BooksController extends Controller
      */
     public function index()
     {
-        $books = Book::query()->paginate(10);
+        $books = $this->repository->paginate(10);
         return view('books.index', compact('books'));
     }
 
@@ -41,7 +52,7 @@ class BooksController extends Controller
         $data = $request->all();
         $data['author_id'] = Auth::getUser()->id;
 
-        Book::create($data);
+        $this->repository->create($data);
         $url = $request->get('redirect_to', route('books.index'));
         $request->session()->flash('message', 'Livro cadastrado com sucesso.');
 
@@ -54,8 +65,9 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit($id)
     {
+        $book = $this->repository->find($id);
         return view('books.edit', compact('book'));
     }
 
@@ -66,13 +78,10 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BooksRequest $request, Book $book)
+    public function update(BooksRequest $request, $id)
     {
-        $data = $request->all();
-        $data['author_id'] = Auth::getUser()->id;
-
-        $book->fill($data);
-        $book->save();
+        $data = $request->except(['author_id']);
+        $this->repository->update($data, $id);
         $url = $request->get('redirect_to', route('books.index'));
         $request->session()->flash('message', 'Livro alterado com sucesso.');
 
@@ -85,9 +94,9 @@ class BooksController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy($id)
     {
-        $book->delete();
+        $this->repository->delete($id);
         \Session::flash('message', 'Livro excluído com sucesso.');
         return redirect()->to(\URL::previous());
     }

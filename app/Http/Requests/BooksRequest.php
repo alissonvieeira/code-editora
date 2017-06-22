@@ -20,9 +20,9 @@ class BooksRequest extends FormRequest
 
         if($this->route()->getAction()['as'] == 'books.update'){
 
-            $book = $this->route('book');
+            $authorId = $this->route('book');
 
-            if($book->author_id == Auth::getUser()->id){
+            if($authorId == Auth::getUser()->id){
                 return true;
             }
             return false;
@@ -36,8 +36,7 @@ class BooksRequest extends FormRequest
      */
     public function rules()
     {
-        $book = $this->route('book');
-        $id = $book ? $book->id : NULL;
+        $id = $this->route('book');
 
         return [
             'title' => "required|max:255|unique:books,title,$id",

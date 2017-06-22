@@ -31,11 +31,15 @@ $factory->define(\CodePub\Models\Category::class, function (Faker\Generator $fak
 });
 
 $factory->define(\CodePub\Models\Book::class, function (Faker\Generator $faker) {
+
+    $repository = app(\CodePub\Repositories\UserRepository::class);
+    $authorId = $repository->all()->random()->id;
+
     return [
-        'author_id' => '1',
-        'title' => ucfirst($faker->word),
-        'subtitle' => ucfirst($faker->word),
-        'price' => $faker->randomDigit()
+        'author_id' => $authorId,
+        'title' => ucfirst($faker->sentence(2)),
+        'subtitle' => ucfirst($faker->sentence(3)),
+        'price' => $faker->randomFloat(2, 10, 100)
     ];
 }) ;
 

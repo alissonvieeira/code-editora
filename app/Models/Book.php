@@ -13,12 +13,12 @@ class Book extends Model implements TableInterface
 
     public function author()
     {
-        return $this->belongsTo('CodePub\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function getTableHeaders()
     {
-        return ['#', 'Título', 'Subtítulo', 'Preço'];
+        return ['#', 'Título', 'Subtítulo', 'Autor', 'Preço'];
     }
 
     public function getValueForHeader($header)
@@ -30,6 +30,8 @@ class Book extends Model implements TableInterface
                 return $this->title;
             case 'Subtítulo':
                 return $this->subtitle;
+            case 'Autor':
+                return $this->author->name;
             case 'Preço':
                 return $this->price;
         }
