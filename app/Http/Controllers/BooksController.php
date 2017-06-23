@@ -27,10 +27,8 @@ class BooksController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $this->repository->pushCriteria(new FindByTitleCriteria('Quis nam.'))
-            ->pushCriteria(new FindByAuthorCriteria());
         $books = $this->repository->paginate(10);
         return view('books.index', compact('books'));
     }
