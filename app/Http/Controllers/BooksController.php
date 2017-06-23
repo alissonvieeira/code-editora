@@ -29,8 +29,9 @@ class BooksController extends Controller
      */
     public function index(Request $request)
     {
+        $search = $request->get('search');
         $books = $this->repository->paginate(10);
-        return view('books.index', compact('books'));
+        return view('books.index', compact('books', 'search'));
     }
 
     /**
