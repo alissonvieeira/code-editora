@@ -8,10 +8,15 @@
         </div>
         <br/>
         <div class="row">
-            {!! Form::model(compact('search'), ['class' => 'form-inline', 'method' => 'GET']) !!}
+            {!! Form::model(compact('books'), ['class' => 'form-inline', 'method' => 'GET']) !!}
                 {!! Html::openFormGroup() !!}
-                    {!! Form::label('search', 'Pesquisar por título:', ['class' => 'control-label']) !!}
-                    {!! Form::text('search', null, ['class' => 'form-control']) !!}
+                    {!! Form::label('title', 'Pesquisar por título:', ['class' => 'control-label']) !!}
+                    {!! Form::text('title', null, ['class' => 'form-control']) !!}
+                {!! Html::closeFormGroup() !!}
+
+                {!! Html::openFormGroup() !!}
+                    {!! Form::label('subtitle', 'Pesquisar por subtítulo:', ['class' => 'control-label']) !!}
+                    {!! Form::text('subtitle', null, ['class' => 'form-control']) !!}
                 {!! Html::closeFormGroup() !!}
 
                 {!! Html::openFormGroup() !!}

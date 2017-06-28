@@ -21,6 +21,6 @@ class FindByAuthorCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        return $model->where('author_id', \Auth::user()->id);
+        return $model->where('author_id', \Auth::user());
     }
 }

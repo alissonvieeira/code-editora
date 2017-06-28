@@ -25,10 +25,11 @@ class CategoriesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->get('search');
         $categories = $this->repository->paginate(10);
-        return view('categories.index', compact('categories'));
+        return view('categories.index', compact('categories', 'search'));
     }
 
     /**
