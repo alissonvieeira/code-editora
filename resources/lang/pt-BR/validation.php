@@ -120,6 +120,8 @@ return [
         'address'               => 'endereço',
         'age'                   => 'idade',
         'body'                  => 'conteúdo',
+        'categories'            => 'categorias',
+        'categories_*'          => 'categoria :num',
         'city'                  => 'cidade',
         'country'               => 'país',
         'date'                  => 'data',
